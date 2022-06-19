@@ -1,10 +1,18 @@
+:root {
+	--color-primary-1: rgb(17, 17, 17);
+	--color-primary-2: rgb(32, 32, 32);
+	--color-primary-3: rgb(255, 255, 255);
+	--color-primary-4: rgb(255, 0, 0);
+	--color-primary-5: rgb(190, 0, 0);
+}
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 body {
-	margin: 0;
+	color: var(--color-primary-3);
+	background: var(--color-primary-2);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
 		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
 		"Helvetica Neue", sans-serif;
@@ -15,4 +23,117 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
+}
+/* Navbar */
+.nav-header {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--color-primary-1);
+	padding: 0.5rem;
+}
+.nav-header {
+	font-size: 1.2rem;
+}
+.nav-buttons {
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	background: transparent;
+	padding-top: 7px;
+}
+/* Cart Button */
+.nav-cart-numbers {
+	position: absolute;
+	font-size: 0.8rem;
+	background-color: rgb(179, 0, 0);
+	padding: 1px 5px;
+	border-radius: 20px;
+	top: 0;
+	right: 7%;
+	/* display: none; */
+}
+.nav-cart {
+	position: relative;
+	color: var(--color-primary-3);
+	font-size: 2.1rem;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	padding-top: 2px;
+	padding-right: 17px;
+}
+/* Hamburger Button */
+.nav-hamburger {
+	color: var(--color-primary-3);
+	font-size: 2.2rem;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	padding-top: 2px;
+	display: none;
+}
+.nav-hamburger:hover {
+	color: var(--color-primary-4);
+}
+.nav-cart:hover {
+	color: var(--color-primary-4);
+}
+@media (orientation: portrait) {
+	/* @media Nav buttons */
+	.nav-buttons {
+		justify-content: center;
+	}
+	.nav-hamburger {
+		display: block;
+	}
+	/* @media Links */
+
+	.links {
+		color: var(--color-primary-3);
+		text-decoration: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 0;
+		overflow: hidden;
+		transition: all 0.1s linear;
+		border: none;
+	}
+	.links a {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border-top: 1px solid var(--color-primary-5);
+		background: var(--color-primary-1);
+		margin: 10px;
+	}
+	.links a:last-child {
+		border-bottom: 1px solid var(--color-primary-5);
+	}
+	.show-links {
+		height: 10.6rem;
+	}
+}
+/* Links */
+.links {
+	border-top: 1px solid var(--color-primary-5);
+	border-bottom: 1px solid var(--color-primary-5);
+	background: var(--color-primary-1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.links a {
+	color: var(--color-primary-3);
+	text-decoration: none;
+	margin: auto 17px;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: bolder;
 }
