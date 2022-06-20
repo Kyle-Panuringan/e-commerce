@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoFunnelOutline } from "react-icons/io5";
 import { BsCheckAll } from "react-icons/bs";
 import { GiSmartphone, GiHeartNecklace, GiLargeDress } from "react-icons/gi";
@@ -16,7 +16,7 @@ const categories = [
 	},
 	{
 		icon: <GiHeartNecklace />,
-		name: "Jewelry",
+		name: "Jewelery",
 	},
 	{
 		icon: <FaTshirt />,
@@ -24,12 +24,14 @@ const categories = [
 	},
 	{
 		icon: <GiLargeDress />,
-		name: "Woman's Clothing",
+		name: "Women's Clothing",
 	},
 ];
 
 const Store = ({ products }) => {
-	const [showSidebar, setShowSidebar] = React.useState(false);
+	const [showSidebar, setShowSidebar] = useState(false);
+	const [categoryFitler, setCategoryFilter] = useState("");
+
 	return (
 		<div>
 			<button
@@ -61,7 +63,13 @@ const Store = ({ products }) => {
 						{categories.map((category, index) => {
 							const { icon, name } = category;
 							return (
-								<button key={index}>
+								<button
+									key={index}
+									onClick={() => {
+										setCategoryFilter(name.toLowerCase());
+										console.log(name.toLowerCase());
+									}}
+								>
 									<span className="icon-category">
 										{icon}
 									</span>
@@ -83,28 +91,38 @@ const Store = ({ products }) => {
 			{/* Store Content */}
 			<div className="store-content-base">
 				<ul>
-					{products.map((product) => {
-						const { id, image, price, rating, title } = product;
-						return (
-							<li key={id}>
-								<div className="product-details">
-									<img src={image} alt={title} />
-									<h4>{title}</h4>
-									<h5>&#8369;{price}</h5>
-									<div className="rating-star">
-										<h6>
-											{Array.from({
-												length: rating.rate,
-											}).map((item, index) => {
-												return <AiFillStar />;
-											})}
-										</h6>
-										<h6>({rating.count})</h6>
+					{products
+						.filter((product) => {
+							if (categoryFitler === "all") {
+								return product;
+							} else if (categoryFitler) {
+								return product.category === categoryFitler;
+							} else {
+								return product;
+							}
+						})
+						.map((product) => {
+							const { id, image, price, rating, title } = product;
+							return (
+								<li key={id}>
+									<div className="product-details">
+										<img src={image} alt={title} />
+										<h4>{title}</h4>
+										<h5>&#8369;{price}</h5>
+										<div className="rating-star">
+											<h6>
+												{Array.from({
+													length: rating.rate,
+												}).map(() => {
+													return <AiFillStar />;
+												})}
+											</h6>
+											<h6>({rating.count})</h6>
+										</div>
 									</div>
-								</div>
-							</li>
-						);
-					})}
+								</li>
+							);
+						})}
 				</ul>
 			</div>
 		</div>
