@@ -1,6 +1,7 @@
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	const [showLink, setShowLink] = React.useState(false);
@@ -9,7 +10,11 @@ const Navbar = () => {
 		<nav>
 			<div className="nav-base">
 				<div className="nav-header">
-					<h1>E-Commerce</h1>
+					<h1>
+						<i>
+							<span style={{ color: "red" }}>E-Com</span>merce
+						</i>
+					</h1>
 					<div className="nav-buttons">
 						<div className="nav-cart-items">
 							<button className="nav-cart">
@@ -26,10 +31,10 @@ const Navbar = () => {
 					</div>
 				</div>
 				<div className={`links ${showLink && "show-links"}`}>
-					<a href="#">Home</a>
-					<a href="#">Store</a>
-					<a href="#">Contact Us</a>
-					<a href="#">About Us</a>
+					<Link to="/">Home</Link>
+					<Link to="/store">Store</Link>
+					<Link to="/news-events">News &amp; Events</Link>
+					<Link to="about">About Us</Link>
 				</div>
 			</div>
 		</nav>

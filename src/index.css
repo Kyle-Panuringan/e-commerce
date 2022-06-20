@@ -121,6 +121,13 @@ code {
 	}
 }
 /* Links */
+/* .features {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: blue;
+} */
 .links {
 	border-top: 1px solid var(--color-primary-5);
 	border-bottom: 1px solid var(--color-primary-5);
@@ -136,4 +143,227 @@ code {
 	padding: 10px;
 	text-transform: uppercase;
 	font-weight: bolder;
+}
+/* Features & ArrowSlider */
+.container-slider {
+	max-width: 700px;
+	height: 500px;
+	margin: 100px auto 0;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.slide {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	transition: opacity ease-in-out 0.4s;
+}
+.active-slide {
+	opacity: 1;
+}
+.slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.btn-slide {
+	color: var(--color-primary-5);
+	font-size: 4rem;
+	border-radius: 50%;
+	background: var(--color-primary-1);
+	border: 1px solid rgba(34, 34, 34, 0.287);
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.prev {
+	top: 50%;
+	left: 20px;
+}
+.next {
+	top: 50%;
+	right: 20px;
+}
+/* Category Buttons */
+.store-base {
+	position: fixed;
+	background: var(--color-primary-1);
+	width: 20%;
+	height: 100%;
+}
+.store-base h2 {
+	background: var(--color-primary-5);
+	border: 1px solid var(--color-primary-5);
+	border-bottom: none;
+	text-align: center;
+	padding: 20px 0px;
+	text-transform: uppercase;
+}
+.filter-buttons button:nth-child(1) {
+	border-top: 1px solid var(--color-primary-5);
+}
+.filter-buttons button {
+	color: var(--color-primary-3);
+	font-size: 1.1rem;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	text-transform: uppercase;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border: none;
+	border: 1px solid var(--color-primary-5);
+	border-top: none;
+	border-radius: 0;
+	cursor: pointer;
+	background: var(--color-primary-1);
+}
+
+.icon-category {
+	font-size: 2.5rem;
+}
+.filter-buttons button:hover {
+	color: var(--color-primary-4);
+	background-color: var(--color-primary-2);
+	border-right: none;
+	transition: all 0.4s;
+	overflow: hidden;
+	padding-left: 30px;
+	right: 0;
+}
+.filter-button {
+	color: var(--color-primary-3);
+	position: absolute;
+	display: none;
+	font-size: 2rem;
+	position: absolute;
+	padding: 5px;
+	margin-top: 10px;
+	left: 2%;
+	border: 2px solid var(--color-primary-3);
+	border-radius: 10px;
+	background: transparent;
+}
+.search-box {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px auto;
+	background: var(--color-primary-3);
+	width: 90%;
+	height: 4%;
+	border-radius: 10px;
+	padding: 17px;
+}
+.search-box input {
+	padding: 7px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 2px 2px;
+	width: 90%;
+	height: 90%;
+	font-size: 1rem;
+	border: none;
+	outline: none;
+	background: transparent;
+}
+.search-box button {
+	position: absolute;
+	top: 0;
+	right: 1.4%;
+	bottom: 0;
+	font-size: 1.1rem;
+	font-weight: bolder;
+	border: none;
+	background: transparent;
+}
+.sort-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	text-transform: uppercase;
+	width: 100%;
+	margin: 10px auto;
+}
+.sort-buttons button {
+	width: 35%;
+	color: var(--color-primary-3);
+	border: 2px solid var(--color-primary-3);
+	font-weight: bolder;
+	border-radius: 10px;
+	background: none;
+	text-transform: uppercase;
+	padding: 8px 20px;
+}
+.sort-buttons select {
+	width: 40%;
+	color: var(--color-primary-3);
+	border: 2px solid var(--color-primary-3);
+	font-weight: bolder;
+	border-radius: 10px;
+	background: none;
+	text-transform: uppercase;
+	padding: 7px 15px;
+}
+
+.sort-buttons option {
+	color: var(--color-primary-1);
+	border: 2px solid var(--color-primary-1);
+	font-weight: bolder;
+	border-radius: 10px;
+	background: none;
+	text-transform: uppercase;
+	padding: 7px 15px;
+}
+@media screen and (max-width: 1280px) {
+	.sort-buttons {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.sort-buttons button {
+		width: 90%;
+	}
+	.sort-buttons select {
+		margin-top: 10px;
+		text-align: center;
+		width: 90%;
+	}
+}
+@media screen and (max-width: 974px) {
+	.filter-button {
+		display: block;
+		left: 10%;
+		margin-top: 20px;
+	}
+	.store-base {
+		width: 100%;
+		height: 26vh;
+		border-bottom: 1px solid var(--color-primary-4);
+	}
+	.store-buttons {
+		position: absolute;
+		width: 100%;
+		left: -100%;
+		transition: all 0.4s;
+		z-index: -1;
+	}
+	.store-buttons {
+		left: 0;
+	}
+	.sort-buttons {
+		padding: 12px 0;
+		margin: 0;
+		position: relative;
+		width: 80%;
+		left: 19%;
+	}
 }
