@@ -31,6 +31,28 @@ const categories = [
 const Store = ({ products }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState("");
+	const [filterStar, setFilterStar] = useState("");
+
+	// Seperate the filter method to able to know if the array is length is greater than 0
+	const filterProducts = products.filter((product) => {
+		if (filterStar == Math.round(product.rating.rate)) {
+			if (categoryFitler === "all") {
+				return product;
+			} else if (categoryFitler) {
+				return product.category === categoryFitler;
+			} else {
+				return product;
+			}
+		} else if (filterStar == 0) {
+			if (categoryFitler === "all") {
+				return product;
+			} else if (categoryFitler) {
+				return product.category === categoryFitler;
+			} else {
+				return product;
+			}
+		}
+	});
 
 	return (
 		<div>
@@ -47,7 +69,11 @@ const Store = ({ products }) => {
 				</div>
 				<div className="sort-buttons">
 					<button>price</button>
-					<select name="rating" id="rating">
+					<select
+						name="rating"
+						id="rating"
+						onClick={(e) => setFilterStar(e.target.value)}
+					>
 						<option value="0">All</option>
 						<option value="1">1 Star</option>
 						<option value="2">2 Star</option>
@@ -67,7 +93,6 @@ const Store = ({ products }) => {
 									key={index}
 									onClick={() => {
 										setCategoryFilter(name.toLowerCase());
-										console.log(name.toLowerCase());
 									}}
 								>
 									<span className="icon-category">
@@ -91,17 +116,8 @@ const Store = ({ products }) => {
 			{/* Store Content */}
 			<div className="store-content-base">
 				<ul>
-					{products
-						.filter((product) => {
-							if (categoryFitler === "all") {
-								return product;
-							} else if (categoryFitler) {
-								return product.category === categoryFitler;
-							} else {
-								return product;
-							}
-						})
-						.map((product) => {
+					{filterProducts.length > 0 ? (
+						filterProducts.map((product) => {
 							const { id, image, price, rating, title } = product;
 							return (
 								<li key={id}>
@@ -112,7 +128,9 @@ const Store = ({ products }) => {
 										<div className="rating-star">
 											<h6>
 												{Array.from({
-													length: rating.rate,
+													length: Math.round(
+														rating.rate
+													),
 												}).map(() => {
 													return <AiFillStar />;
 												})}
@@ -122,7 +140,15 @@ const Store = ({ products }) => {
 									</div>
 								</li>
 							);
-						})}
+						})
+					) : (
+						<div className="emptyDisplay">
+							<h2>
+								No available products based on your search or
+								filter.
+							</h2>
+						</div>
+					)}
 				</ul>
 			</div>
 		</div>

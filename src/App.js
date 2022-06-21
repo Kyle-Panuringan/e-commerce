@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
 	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const getProducts = async () => {
 		const response = await fetch("https://fakestoreapi.com/products");
