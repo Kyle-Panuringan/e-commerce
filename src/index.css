@@ -287,14 +287,16 @@ code {
 }
 .sort-buttons {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
 	text-transform: uppercase;
 	width: 100%;
+	background-color: var(--color-primary-1);
 	margin: 10px auto;
 }
 .sort-buttons button {
-	width: 35%;
+	width: 90%;
 	color: var(--color-primary-3);
 	border: 2px solid var(--color-primary-3);
 	font-weight: bolder;
@@ -304,7 +306,8 @@ code {
 	padding: 8px 20px;
 }
 .sort-buttons select {
-	width: 40%;
+	text-align: center;
+	width: 90%;
 	color: var(--color-primary-3);
 	border: 2px solid var(--color-primary-3);
 	font-weight: bolder;
@@ -312,6 +315,7 @@ code {
 	background: none;
 	text-transform: uppercase;
 	padding: 7px 15px;
+	margin: 7px auto;
 }
 
 .sort-buttons option {
@@ -386,18 +390,23 @@ code {
 	text-align: center;
 	margin-top: 70px;
 }
+.store-buttons h2 {
+	padding: 9px;
+}
 @media screen and (max-width: 1280px) {
 	.sort-buttons {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		height: 20%;
 	}
 	.sort-buttons button {
 		width: 90%;
+		margin: 0 auto;
+		position: relative;
 	}
 	.sort-buttons select {
-		margin-top: 10px;
 		text-align: center;
 		width: 90%;
 	}
@@ -421,10 +430,20 @@ code {
 	.show-sidebar {
 		left: 0;
 	}
+	.search-box {
+		margin: 10px auto 0 auto;
+	}
 	.sort-buttons {
+		height: 85%;
 		padding: 12px 0;
 		margin: 0;
 		position: relative;
+	}
+	.sort-buttons select {
+		margin: 7px auto;
+	}
+	.sort-buttons button {
+		margin: 0;
 	}
 	.store-content-base {
 		margin: 0;

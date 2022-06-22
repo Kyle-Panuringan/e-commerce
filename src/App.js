@@ -13,6 +13,7 @@ function App() {
 		sortAscend: false,
 		sortActive: false,
 	});
+	const [search, setSearch] = useState("");
 	const [loading, setLoading] = useState(true);
 
 	function sortProducts() {
@@ -57,6 +58,8 @@ function App() {
 							loading={loading}
 							sortProducts={sortProducts}
 							ascend={ascend}
+							search={search}
+							setSearch={setSearch}
 						/>
 					}
 				></Route>

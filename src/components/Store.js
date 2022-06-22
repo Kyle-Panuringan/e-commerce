@@ -28,14 +28,21 @@ const categories = [
 	},
 ];
 
-const Store = ({ products, loading, sortProducts, ascend }) => {
+const Store = ({
+	products,
+	loading,
+	sortProducts,
+	ascend,
+	search,
+	setSearch,
+}) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState("");
 	const [filterStar, setFilterStar] = useState("");
 
 	const sortArrow = ascend.sortAscend ? "▴" : "▾";
 
-	// Seperate the filter method to able to know if the array is length is greater than 0
+	// Seperate the some filter method to able to know if the array is length is greater than 0
 	const filterProducts = products.filter((product) => {
 		if (filterStar == Math.round(product.rating.rate)) {
 			if (categoryFitler === "all") {
@@ -66,9 +73,17 @@ const Store = ({ products, loading, sortProducts, ascend }) => {
 			</button>
 			<div className={`store-base ${showSidebar && "show-sidebar"}`}>
 				<div className="search-box">
-					<input type="text" placeholder="Search...." />
-					<button>X</button>
+					<input
+						type="text"
+						placeholder="Search...."
+						value={search}
+						onChange={(e) => {
+							setSearch(e.target.value);
+						}}
+					/>
+					{search && <button onClick={() => setSearch("")}>X</button>}
 				</div>
+				{/* Sort Price & Filter Rating */}
 				<div className="sort-buttons">
 					<button onClick={sortProducts}>
 						price{ascend.sortActive && sortArrow}
@@ -85,6 +100,7 @@ const Store = ({ products, loading, sortProducts, ascend }) => {
 						<option value="4">4 Star</option>
 						<option value="5">5 Star</option>
 					</select>
+					<button>Reset</button>
 				</div>
 
 				<div className="store-buttons">
@@ -121,31 +137,48 @@ const Store = ({ products, loading, sortProducts, ascend }) => {
 			<div className="store-content-base">
 				<ul>
 					{loading && <h2 className="loadingScreen">Loading....</h2>}
+					{/* Seperate the some filter method to able to know if the array is length is greater than 0 (If 0 then return false) */}
 					{loading || filterProducts.length > 0 ? (
-						filterProducts.map((product) => {
-							const { id, image, price, rating, title } = product;
-							return (
-								<li key={id}>
-									<div className="product-details">
-										<img src={image} alt={title} />
-										<h4>{title}</h4>
-										<h5>&#8369;{price}</h5>
-										<div className="rating-star">
-											<h6>
-												{Array.from({
-													length: Math.round(
-														rating.rate
-													),
-												}).map(() => {
-													return <AiFillStar />;
-												})}
-											</h6>
-											<h6>({rating.count})</h6>
+						filterProducts
+							.filter((filterProduct) => {
+								if (search === "") {
+									return filterProduct;
+								} else if (
+									search
+										.toLowerCase()
+										.startsWith(search.toLowerCase()) ===
+									filterProduct.title
+										.toLowerCase()
+										.startsWith(search.toLowerCase())
+								) {
+									return filterProduct;
+								}
+							})
+							.map((product) => {
+								const { id, image, price, rating, title } =
+									product;
+								return (
+									<li key={id}>
+										<div className="product-details">
+											<img src={image} alt={title} />
+											<h4>{title}</h4>
+											<h5>&#8369;{price}</h5>
+											<div className="rating-star">
+												<h6>
+													{Array.from({
+														length: Math.round(
+															rating.rate
+														),
+													}).map(() => {
+														return <AiFillStar />;
+													})}
+												</h6>
+												<h6>({rating.count})</h6>
+											</div>
 										</div>
-									</div>
-								</li>
-							);
-						})
+									</li>
+								);
+							})
 					) : (
 						<div className="emptyDisplay">
 							<h2>
