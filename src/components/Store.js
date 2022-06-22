@@ -28,7 +28,7 @@ const categories = [
 	},
 ];
 
-const Store = ({ products }) => {
+const Store = ({ products, loading }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState("");
 	const [filterStar, setFilterStar] = useState("");
@@ -116,7 +116,8 @@ const Store = ({ products }) => {
 			{/* Store Content */}
 			<div className="store-content-base">
 				<ul>
-					{filterProducts.length > 0 ? (
+					{loading && <h2 className="loadingScreen">Loading....</h2>}
+					{loading || filterProducts.length > 0 ? (
 						filterProducts.map((product) => {
 							const { id, image, price, rating, title } = product;
 							return (

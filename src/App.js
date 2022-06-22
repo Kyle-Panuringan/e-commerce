@@ -9,13 +9,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
 	const [products, setProducts] = useState([]);
+	const [ascend, setAscend] = useState(false);
 	const [loading, setLoading] = useState(true);
 
 	const getProducts = async () => {
 		const response = await fetch("https://fakestoreapi.com/products");
 		const data = await response.json();
 		setProducts(data);
-		console.log("Fetch Run");
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -37,7 +38,7 @@ function App() {
 				></Route>
 				<Route
 					path="/store"
-					element={<Store products={products} />}
+					element={<Store products={products} loading={loading} />}
 				></Route>
 				<Route path="/news-events" element={<NewsEvents />}></Route>
 				<Route path="/about" element={<About />}></Route>
