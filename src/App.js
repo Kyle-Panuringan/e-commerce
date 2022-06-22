@@ -9,8 +9,21 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
 	const [products, setProducts] = useState([]);
-	const [ascend, setAscend] = useState(false);
+	const [ascend, setAscend] = useState({
+		sortAscend: false,
+		sortActive: false,
+	});
 	const [loading, setLoading] = useState(true);
+
+	function sortProducts() {
+		let sortItems = [...products];
+		if (ascend.sortAscend) {
+			setProducts(sortItems.sort((a, b) => a.price - b.price));
+		} else {
+			setProducts(sortItems.sort((a, b) => b.price - a.price));
+		}
+		setAscend({ sortAscend: !ascend.sortAscend, sortActive: true });
+	}
 
 	const getProducts = async () => {
 		const response = await fetch("https://fakestoreapi.com/products");
@@ -38,7 +51,14 @@ function App() {
 				></Route>
 				<Route
 					path="/store"
-					element={<Store products={products} loading={loading} />}
+					element={
+						<Store
+							products={products}
+							loading={loading}
+							sortProducts={sortProducts}
+							ascend={ascend}
+						/>
+					}
 				></Route>
 				<Route path="/news-events" element={<NewsEvents />}></Route>
 				<Route path="/about" element={<About />}></Route>

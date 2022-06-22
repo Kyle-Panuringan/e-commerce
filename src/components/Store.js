@@ -28,10 +28,12 @@ const categories = [
 	},
 ];
 
-const Store = ({ products, loading }) => {
+const Store = ({ products, loading, sortProducts, ascend }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState("");
 	const [filterStar, setFilterStar] = useState("");
+
+	const sortArrow = ascend.sortAscend ? "▴" : "▾";
 
 	// Seperate the filter method to able to know if the array is length is greater than 0
 	const filterProducts = products.filter((product) => {
@@ -68,7 +70,9 @@ const Store = ({ products, loading }) => {
 					<button>X</button>
 				</div>
 				<div className="sort-buttons">
-					<button>price</button>
+					<button onClick={sortProducts}>
+						price{ascend.sortActive && sortArrow}
+					</button>
 					<select
 						name="rating"
 						id="rating"
