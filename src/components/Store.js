@@ -42,6 +42,7 @@ const Store = ({
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState("");
 	const [filterStar, setFilterStar] = useState("");
+	const [activeButton, setActiveButton] = useState("All");
 
 	const sortArrow = ascend.sortAscend ? "▴" : "▾";
 
@@ -120,9 +121,15 @@ const Store = ({
 							const { icon, name } = category;
 							return (
 								<button
+									className={
+										name == activeButton
+											? "filter-active"
+											: ""
+									}
 									key={index}
 									onClick={() => {
 										setCategoryFilter(name.toLowerCase());
+										setActiveButton(name);
 									}}
 								>
 									<span className="icon-category">

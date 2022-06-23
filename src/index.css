@@ -218,19 +218,27 @@ code {
 	border-radius: 0;
 	cursor: pointer;
 	background: var(--color-primary-1);
+	transition: all 0.4s;
 }
-
 .icon-category {
 	font-size: 2.5rem;
 }
 .filter-buttons button:not(:last-child):hover {
-	color: var(--color-primary-4);
+	color: var(--color-primary-3);
 	background-color: var(--color-primary-2);
-	border-right: none;
+	border-right: 1px solid var(--color-primary-5);
 	transition: all 0.4s;
 	overflow: hidden;
 	padding-left: 30px;
 	right: 0;
+}
+.filter-active {
+	color: var(--color-primary-4) !important;
+	background-color: var(--color-primary-2) !important;
+	transition: all 0.4s !important;
+	overflow: hidden !important;
+	padding-left: 30px !important;
+	right: 0 !important;
 }
 
 .filter-button {
@@ -476,7 +484,7 @@ code {
 		z-index: -1;
 	}
 	.filter-buttons button:not(:last-child):hover {
-		color: var(--color-primary-4);
+		color: var(--color-primary-3);
 		background-color: var(--color-primary-2);
 		border-right: 1px solid var(--color-primary-5);
 		transition: all 0.4s;
