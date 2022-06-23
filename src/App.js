@@ -9,12 +9,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
 	const [products, setProducts] = useState([]);
+	const [unsortProducts, setUnsortProducts] = useState([]);
+	const [search, setSearch] = useState("");
+	const [loading, setLoading] = useState(true);
 	const [ascend, setAscend] = useState({
 		sortAscend: false,
 		sortActive: false,
 	});
-	const [search, setSearch] = useState("");
-	const [loading, setLoading] = useState(true);
 
 	function sortProducts() {
 		let sortItems = [...products];
@@ -30,7 +31,9 @@ function App() {
 		const response = await fetch("https://fakestoreapi.com/products");
 		const data = await response.json();
 		setProducts(data);
+		setUnsortProducts(data);
 		setLoading(false);
+		console.log("Fetch Run");
 	};
 
 	useEffect(() => {
@@ -60,6 +63,9 @@ function App() {
 							ascend={ascend}
 							search={search}
 							setSearch={setSearch}
+							setProducts={setProducts}
+							unsortProducts={unsortProducts}
+							setAscend={setAscend}
 						/>
 					}
 				></Route>

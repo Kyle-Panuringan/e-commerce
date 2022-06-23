@@ -304,6 +304,12 @@ code {
 	background: none;
 	text-transform: uppercase;
 	padding: 8px 20px;
+	cursor: pointer;
+}
+.sort-buttons button:hover {
+	color: var(--color-primary-4);
+	background: var(--color-primary-2);
+	border-color: var(--color-primary-4);
 }
 .sort-buttons select {
 	text-align: center;
@@ -316,8 +322,16 @@ code {
 	text-transform: uppercase;
 	padding: 7px 15px;
 	margin: 7px auto;
+	cursor: pointer;
 }
-
+.sort-buttons select option {
+	color: #fff;
+}
+.sort-buttons select:hover {
+	color: var(--color-primary-4);
+	background: var(--color-primary-2);
+	border-color: var(--color-primary-4);
+}
 .sort-buttons option {
 	color: var(--color-primary-1);
 	border: 2px solid var(--color-primary-1);
@@ -392,6 +406,16 @@ code {
 }
 .store-buttons h2 {
 	padding: 9px;
+}
+.about-base h2 {
+	font-size: 5rem;
+	text-align: center;
+	margin: 40px auto;
+}
+.about-base p {
+	font-size: 1.7rem;
+	text-align: justify;
+	margin: 10px 300px;
 }
 @media screen and (max-width: 1280px) {
 	.sort-buttons {

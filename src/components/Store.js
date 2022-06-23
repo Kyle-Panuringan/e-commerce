@@ -35,12 +35,21 @@ const Store = ({
 	ascend,
 	search,
 	setSearch,
+	setAscend,
+	setProducts,
+	unsortProducts,
 }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState("");
 	const [filterStar, setFilterStar] = useState("");
 
 	const sortArrow = ascend.sortAscend ? "▴" : "▾";
+
+	function resetSortProducts() {
+		setAscend({ sortAscend: false, sortActive: false });
+		setProducts(unsortProducts);
+		setFilterStar("0");
+	}
 
 	// Seperate the some filter method to able to know if the array is length is greater than 0
 	const filterProducts = products.filter((product) => {
@@ -91,7 +100,8 @@ const Store = ({
 					<select
 						name="rating"
 						id="rating"
-						onClick={(e) => setFilterStar(e.target.value)}
+						value={filterStar}
+						onChange={(e) => setFilterStar(e.target.value)}
 					>
 						<option value="0">All</option>
 						<option value="1">1 Star</option>
@@ -100,7 +110,7 @@ const Store = ({
 						<option value="4">4 Star</option>
 						<option value="5">5 Star</option>
 					</select>
-					<button>Reset</button>
+					<button onClick={resetSortProducts}>Reset</button>
 				</div>
 
 				<div className="store-buttons">
