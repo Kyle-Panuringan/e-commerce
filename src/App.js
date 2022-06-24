@@ -5,7 +5,34 @@ import Store from "./components/Store";
 import NewsEvents from "./components/NewsEvents";
 import About from "./components/About";
 import featureImages from "./components/featureImages";
+import Product from "./components/Product";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BsCheckAll } from "react-icons/bs";
+import { GiSmartphone, GiHeartNecklace, GiLargeDress } from "react-icons/gi";
+import { FaTshirt } from "react-icons/fa";
+
+const categories = [
+	{
+		icon: <BsCheckAll />,
+		name: "All",
+	},
+	{
+		icon: <GiSmartphone />,
+		name: "Electronics",
+	},
+	{
+		icon: <GiHeartNecklace />,
+		name: "Jewelery",
+	},
+	{
+		icon: <FaTshirt />,
+		name: "Men's Clothing",
+	},
+	{
+		icon: <GiLargeDress />,
+		name: "Women's Clothing",
+	},
+];
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -48,7 +75,7 @@ function App() {
 					path="/"
 					element={
 						<Home
-							products={products}
+							categories={categories}
 							featureImages={featureImages}
 						/>
 					}
@@ -66,11 +93,13 @@ function App() {
 							setProducts={setProducts}
 							unsortProducts={unsortProducts}
 							setAscend={setAscend}
+							categories={categories}
 						/>
 					}
 				></Route>
 				<Route path="/news-events" element={<NewsEvents />}></Route>
 				<Route path="/about" element={<About />}></Route>
+				<Route path="/product/:id" element={<Product />}></Route>
 			</Routes>
 		</Router>
 	);

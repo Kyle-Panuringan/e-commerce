@@ -1,32 +1,7 @@
 import React, { useState } from "react";
 import { IoFunnelOutline } from "react-icons/io5";
-import { BsCheckAll } from "react-icons/bs";
-import { GiSmartphone, GiHeartNecklace, GiLargeDress } from "react-icons/gi";
-import { FaTshirt } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
-
-const categories = [
-	{
-		icon: <BsCheckAll />,
-		name: "All",
-	},
-	{
-		icon: <GiSmartphone />,
-		name: "Electronics",
-	},
-	{
-		icon: <GiHeartNecklace />,
-		name: "Jewelery",
-	},
-	{
-		icon: <FaTshirt />,
-		name: "Men's Clothing",
-	},
-	{
-		icon: <GiLargeDress />,
-		name: "Women's Clothing",
-	},
-];
+import { Link } from "react-router-dom";
 
 const Store = ({
 	products,
@@ -38,6 +13,7 @@ const Store = ({
 	setAscend,
 	setProducts,
 	unsortProducts,
+	categories,
 }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState("");
@@ -175,25 +151,29 @@ const Store = ({
 								const { id, image, price, rating, title } =
 									product;
 								return (
-									<li key={id}>
-										<div className="product-details">
-											<img src={image} alt={title} />
-											<h4>{title}</h4>
-											<h5>&#8369;{price}</h5>
-											<div className="rating-star">
-												<h6>
-													{Array.from({
-														length: Math.round(
-															rating.rate
-														),
-													}).map(() => {
-														return <AiFillStar />;
-													})}
-												</h6>
-												<h6>({rating.count})</h6>
+									<Link to={`/product/${id}`}>
+										<li key={id}>
+											<div className="product-details">
+												<img src={image} alt={title} />
+												<h4>{title}</h4>
+												<h5>&#8369;{price}</h5>
+												<div className="rating-star">
+													<h6>
+														{Array.from({
+															length: Math.round(
+																rating.rate
+															),
+														}).map(() => {
+															return (
+																<AiFillStar />
+															);
+														})}
+													</h6>
+													<h6>({rating.count})</h6>
+												</div>
 											</div>
-										</div>
-									</li>
+										</li>
+									</Link>
 								);
 							})
 					) : (
