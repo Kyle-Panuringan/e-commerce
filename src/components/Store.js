@@ -14,12 +14,17 @@ const Store = ({
 	setProducts,
 	unsortProducts,
 	categories,
+	homeCategory,
 }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
-	const [categoryFitler, setCategoryFilter] = useState("");
+	const [categoryFitler, setCategoryFilter] = useState(
+		homeCategory ? homeCategory.toLowerCase() : "all"
+	);
 	const [filterStar, setFilterStar] = useState("");
-	const [activeButton, setActiveButton] = useState("All");
-
+	const [activeButton, setActiveButton] = useState(
+		homeCategory ? homeCategory : "All"
+	);
+	console.log("Store: ", homeCategory);
 	const sortArrow = ascend.sortAscend ? "▴" : "▾";
 
 	function resetSortProducts() {
@@ -106,6 +111,7 @@ const Store = ({
 									onClick={() => {
 										setCategoryFilter(name.toLowerCase());
 										setActiveButton(name);
+										console.log(name);
 									}}
 								>
 									<span className="icon-category">

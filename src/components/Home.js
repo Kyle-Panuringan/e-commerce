@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Features from "./Features";
 
-const Home = ({ categories, featureImages }) => {
+const Home = ({ categories, featureImages, setHomeCategory }) => {
 	return (
 		<div>
 			<Features featureImages={featureImages} />
@@ -10,10 +11,17 @@ const Home = ({ categories, featureImages }) => {
 					{categories.map((category, index) => {
 						const { icon, name } = category;
 						return (
-							<button key={index}>
+							<Link
+								to="store"
+								key={index}
+								onClick={() => {
+									setHomeCategory(name);
+									console.log(name);
+								}}
+							>
 								<span className="icon-category">{icon}</span>
 								{name}
-							</button>
+							</Link>
 						);
 					})}
 				</div>

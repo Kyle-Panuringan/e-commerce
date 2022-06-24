@@ -39,11 +39,12 @@ function App() {
 	const [unsortProducts, setUnsortProducts] = useState([]);
 	const [search, setSearch] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [homeCategory, setHomeCategory] = useState("");
 	const [ascend, setAscend] = useState({
 		sortAscend: false,
 		sortActive: false,
 	});
-
+	console.log("App: ", homeCategory);
 	function sortProducts() {
 		let sortItems = [...products];
 		if (ascend.sortAscend) {
@@ -77,6 +78,7 @@ function App() {
 						<Home
 							categories={categories}
 							featureImages={featureImages}
+							setHomeCategory={setHomeCategory}
 						/>
 					}
 				></Route>
@@ -94,6 +96,7 @@ function App() {
 							unsortProducts={unsortProducts}
 							setAscend={setAscend}
 							categories={categories}
+							homeCategory={homeCategory}
 						/>
 					}
 				></Route>
