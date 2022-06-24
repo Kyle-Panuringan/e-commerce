@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ cartItems }) => {
 	const [showLink, setShowLink] = React.useState(false);
 
 	return (
@@ -19,7 +19,7 @@ const Navbar = () => {
 					<div className="nav-buttons">
 						<div className="nav-cart-items">
 							<button className="nav-cart">
-								<p className="nav-cart-numbers">01</p>
+								<p className="nav-cart-numbers">{cartItems}</p>
 								<FaShoppingCart />
 							</button>
 						</div>

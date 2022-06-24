@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-const Product = () => {
-	const [productContent, setProductContent] = React.useState([]);
-	const [loading, setLoading] = React.useState(true);
+const Product = ({ setCartItems }) => {
+	const [productContent, setProductContent] = useState([]);
+	const [cart, setCart] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 	const { id } = useParams();
+
+	function addToCart(product) {
+		setCart([...cart, { product }]);
+	}
 
 	async function getProduct() {
 		const response = await fetch(`https://fakestoreapi.com/products/${id}`);
@@ -16,7 +21,12 @@ const Product = () => {
 		setLoading(false);
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
+		setCartItems(cart.length);
+		console.log(cart);
+	}, [cart]);
+
+	useEffect(() => {
 		getProduct();
 	}, []);
 	return (
@@ -35,7 +45,7 @@ const Product = () => {
 					</div>
 					<div className="product-body">
 						<h2>{productContent.title}</h2>
-						<h3 className="rating-star">
+						<h3 className="product-star-product">
 							{/* User Array.from to set the length based on rating value from a object and print how many star it will map */}
 							{Array.from({
 								length: Math.round(productContent.rating.rate),
@@ -55,7 +65,13 @@ const Product = () => {
 							</div>
 						</div>
 						<div className="product-buttons">
-							<button>Add to Cart</button>
+							<button
+								onClick={() => {
+									addToCart(productContent);
+								}}
+							>
+								Add to Cart
+							</button>
 							<button>Buy Now</button>
 						</div>
 					</div>

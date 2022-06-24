@@ -37,6 +37,7 @@ const categories = [
 function App() {
 	const [products, setProducts] = useState([]);
 	const [unsortProducts, setUnsortProducts] = useState([]);
+	const [cartItems, setCartItems] = useState(0);
 	const [search, setSearch] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [homeCategory, setHomeCategory] = useState("");
@@ -69,7 +70,7 @@ function App() {
 
 	return (
 		<Router>
-			<Navbar />
+			<Navbar cartItems={cartItems} />
 			<Routes>
 				<Route
 					path="/"
@@ -101,7 +102,10 @@ function App() {
 				></Route>
 				<Route path="/news-events" element={<NewsEvents />}></Route>
 				<Route path="/about" element={<About />}></Route>
-				<Route path="/product/:id" element={<Product />}></Route>
+				<Route
+					path="/product/:id"
+					element={<Product setCartItems={setCartItems} />}
+				></Route>
 			</Routes>
 		</Router>
 	);
