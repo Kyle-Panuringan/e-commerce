@@ -16,7 +16,6 @@ const Home = ({ categories, featureImages, setHomeCategory }) => {
 								key={index}
 								onClick={() => {
 									setHomeCategory(name);
-									console.log(name);
 								}}
 							>
 								<span className="icon-category">{icon}</span>

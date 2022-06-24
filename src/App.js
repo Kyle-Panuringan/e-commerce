@@ -44,7 +44,6 @@ function App() {
 		sortAscend: false,
 		sortActive: false,
 	});
-	console.log("App: ", homeCategory);
 	function sortProducts() {
 		let sortItems = [...products];
 		if (ascend.sortAscend) {

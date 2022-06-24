@@ -24,7 +24,6 @@ const Store = ({
 	const [activeButton, setActiveButton] = useState(
 		homeCategory ? homeCategory : "All"
 	);
-	console.log("Store: ", homeCategory);
 	const sortArrow = ascend.sortAscend ? "▴" : "▾";
 
 	function resetSortProducts() {
@@ -111,7 +110,6 @@ const Store = ({
 									onClick={() => {
 										setCategoryFilter(name.toLowerCase());
 										setActiveButton(name);
-										console.log(name);
 									}}
 								>
 									<span className="icon-category">
@@ -165,6 +163,7 @@ const Store = ({
 												<h5>&#8369;{price}</h5>
 												<div className="rating-star">
 													<h6>
+														{/* User Array.from to set the length based on rating value from a object and print how many star it will map */}
 														{Array.from({
 															length: Math.round(
 																rating.rate
