@@ -1,10 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
 	const [productContent, setProductContent] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
+	const navigate = useNavigate();
 	const { id } = useParams();
 
 	async function getProduct() {
@@ -19,7 +21,10 @@ const Product = () => {
 	}, []);
 	return (
 		<div>
-			{loading && <h2>Loading....</h2>}
+			<button className="product-back" onClick={() => navigate(-1)}>
+				🞀 Go Back
+			</button>
+			{loading && <h2 className="loadingScreen">Loading....</h2>}
 			{loading || (
 				<div className="product-content">
 					<div className="product-head">
@@ -45,7 +50,7 @@ const Product = () => {
 							<h3>Quantity:</h3>
 							<div>
 								<button>-</button>
-								<p>0</p>
+								<p>1</p>
 								<button>+</button>
 							</div>
 						</div>
