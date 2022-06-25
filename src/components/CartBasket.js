@@ -23,7 +23,9 @@ const CartBasket = ({ cartItems, setCartItems, addToCart, removeToCart }) => {
 									<h2>{item.title}</h2>
 									<h2>
 										&#8369;
-										{item.price}
+										{(item.price * item.quantity).toFixed(
+											2
+										)}
 									</h2>
 									<button
 										onClick={() => {

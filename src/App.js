@@ -95,8 +95,6 @@ function App() {
 	}
 
 	useEffect(() => {
-		console.log(cartItems);
-		console.log(cartSize);
 		setCartSize(cartItems.reduce((a, c) => a + c.quantity, 0));
 	}, [cartItems]);
 
