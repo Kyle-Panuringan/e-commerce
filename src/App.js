@@ -6,10 +6,12 @@ import NewsEvents from "./components/NewsEvents";
 import About from "./components/About";
 import featureImages from "./components/featureImages";
 import Product from "./components/Product";
+import CartBasket from "./components/CartBasket";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BsCheckAll } from "react-icons/bs";
 import { GiSmartphone, GiHeartNecklace, GiLargeDress } from "react-icons/gi";
 import { FaTshirt } from "react-icons/fa";
+import data from "./components/data";
 
 const categories = [
 	{
@@ -35,16 +37,33 @@ const categories = [
 ];
 
 function App() {
-	const [products, setProducts] = useState([]);
-	const [unsortProducts, setUnsortProducts] = useState([]);
-	const [cartItems, setCartItems] = useState(0);
+	const [products, setProducts] = useState(data);
+	const [productData, setProductData] = useState(null);
+	const [cartItems, setCartItems] = useState([]);
 	const [search, setSearch] = useState("");
-	const [loading, setLoading] = useState(true);
 	const [homeCategory, setHomeCategory] = useState("");
+	const [modalProduct, setModalProduct] = useState(false);
 	const [ascend, setAscend] = useState({
 		sortAscend: false,
 		sortActive: false,
 	});
+	const unsortProducts = data;
+
+	function addToCart(product) {
+		const exist = cartItems.find((item) => item.id === product.id);
+		if (exist) {
+			setCartItems(
+				cartItems.map((item) =>
+					item.id === product.id
+						? { ...exist, quantity: exist.quantity + 1 }
+						: item
+				)
+			);
+		} else {
+			setCartItems([...cartItems, { ...products, quantity: 1 }]);
+		}
+	}
+
 	function sortProducts() {
 		let sortItems = [...products];
 		if (ascend.sortAscend) {
@@ -55,22 +74,13 @@ function App() {
 		setAscend({ sortAscend: !ascend.sortAscend, sortActive: true });
 	}
 
-	const getProducts = async () => {
-		const response = await fetch("https://fakestoreapi.com/products");
-		const data = await response.json();
-		setProducts(data);
-		setUnsortProducts(data);
-		setLoading(false);
-		console.log("Fetch Run");
-	};
-
 	useEffect(() => {
-		getProducts();
-	}, []);
+		console.log(productData);
+	}, [productData]);
 
 	return (
 		<Router>
-			<Navbar cartItems={cartItems} />
+			<Navbar />
 			<Routes>
 				<Route
 					path="/"
@@ -87,26 +97,34 @@ function App() {
 					element={
 						<Store
 							products={products}
-							loading={loading}
 							sortProducts={sortProducts}
 							ascend={ascend}
 							search={search}
 							setSearch={setSearch}
 							setProducts={setProducts}
 							unsortProducts={unsortProducts}
+							setProductData={setProductData}
 							setAscend={setAscend}
 							categories={categories}
 							homeCategory={homeCategory}
+							setModalProduct={setModalProduct}
 						/>
 					}
 				></Route>
 				<Route path="/news-events" element={<NewsEvents />}></Route>
 				<Route path="/about" element={<About />}></Route>
 				<Route
-					path="/product/:id"
-					element={<Product setCartItems={setCartItems} />}
+					path="/cart-items"
+					element={<CartBasket cartItems={cartItems} />}
 				></Route>
 			</Routes>
+			{modalProduct && (
+				<Product
+					addToCart={addToCart}
+					productData={productData}
+					setModalProduct={setModalProduct}
+				/>
+			)}
 		</Router>
 	);
 }

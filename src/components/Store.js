@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { IoFunnelOutline } from "react-icons/io5";
 import { AiFillStar } from "react-icons/ai";
-import { Link } from "react-router-dom";
 
 const Store = ({
 	products,
-	loading,
 	sortProducts,
 	ascend,
 	search,
@@ -15,6 +13,8 @@ const Store = ({
 	unsortProducts,
 	categories,
 	homeCategory,
+	setProductData,
+	setModalProduct,
 }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [categoryFitler, setCategoryFilter] = useState(
@@ -133,9 +133,8 @@ const Store = ({
 			{/* Store Content */}
 			<div className="store-content-base">
 				<ul>
-					{loading && <h2 className="loadingScreen">Loading....</h2>}
 					{/* Seperate the some filter method to able to know if the array is length is greater than 0 (If 0 then return false) */}
-					{loading || filterProducts.length > 0 ? (
+					{filterProducts.length > 0 ? (
 						filterProducts
 							.filter((filterProduct) => {
 								if (search === "") {
@@ -155,30 +154,32 @@ const Store = ({
 								const { id, image, price, rating, title } =
 									product;
 								return (
-									<Link to={`/product/${id}`}>
-										<li key={id}>
-											<div className="product-details">
-												<img src={image} alt={title} />
-												<h4>{title}</h4>
-												<h5>&#8369;{price}</h5>
-												<div className="rating-star">
-													<h6>
-														{/* User Array.from to set the length based on rating value from a object and print how many star it will map */}
-														{Array.from({
-															length: Math.round(
-																rating.rate
-															),
-														}).map(() => {
-															return (
-																<AiFillStar />
-															);
-														})}
-													</h6>
-													<h6>({rating.count})</h6>
-												</div>
+									<li
+										key={id}
+										onClick={() => {
+											setProductData(product);
+											setModalProduct(true);
+										}}
+									>
+										<div className="product-details">
+											<img src={image} alt={title} />
+											<h4>{title}</h4>
+											<h5>&#8369;{price}</h5>
+											<div className="rating-star">
+												<h6>
+													{/* User Array.from to set the length based on rating value from a object and print how many star it will map */}
+													{Array.from({
+														length: Math.round(
+															rating.rate
+														),
+													}).map(() => {
+														return <AiFillStar />;
+													})}
+												</h6>
+												<h6>({rating.count})</h6>
 											</div>
-										</li>
-									</Link>
+										</div>
+									</li>
 								);
 							})
 					) : (
