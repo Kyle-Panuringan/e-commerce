@@ -20,6 +20,17 @@ const Features = ({ featureImages }) => {
 		}
 	};
 
+	const moveDot = (index) => {
+		setSlideIndex(index);
+	};
+
+	React.useEffect(() => {
+		const interval = setInterval(() => {
+			nextSlide();
+		}, 3000);
+		return () => clearInterval(interval);
+	});
+
 	return (
 		<div className="slider-container">
 			{featureImages &&
@@ -40,6 +51,19 @@ const Features = ({ featureImages }) => {
 			{/* Show the button twice by calling it here in JSX */}
 			<ArrowSlider moveSlide={nextSlide} direction={"next"} />
 			<ArrowSlider moveSlide={prevSlide} direction={"prev"} />
+
+			<div className="container-dots">
+				{Array.from({ length: featureImages.length }).map(
+					(item, index) => (
+						<div
+							onClick={() => moveDot(index + 1)}
+							className={
+								slideIndex === index + 1 ? "dot active" : "dot"
+							}
+						></div>
+					)
+				)}
+			</div>
 		</div>
 	);
 };

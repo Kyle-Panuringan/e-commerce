@@ -15,7 +15,7 @@ const Product = ({
 			className="product-modal"
 			onClick={() => {
 				setModalProduct(false);
-				setQuantity(0);
+				setQuantity(1);
 			}}
 		>
 			<div
@@ -26,7 +26,7 @@ const Product = ({
 					className="close-modal"
 					onClick={() => {
 						setModalProduct(false);
-						setQuantity(0);
+						setQuantity(1);
 					}}
 				>
 					X

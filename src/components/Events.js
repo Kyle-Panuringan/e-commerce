@@ -1,11 +1,9 @@
 import React from "react";
 
-const About = () => {
+const Events = () => {
 	return (
 		<div className="base">
-			<h2>
-				About <span style={{ color: "red" }}>Us</span>
-			</h2>
+			<h2>Events</h2>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 				Exercitationem sequi, facere ipsa vel itaque quibusdam, dolores
@@ -21,4 +19,4 @@ const About = () => {
 	);
 };
 
-export default About;
+export default Events;

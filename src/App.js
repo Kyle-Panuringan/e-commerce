@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Store from "./components/Store";
-import NewsEvents from "./components/NewsEvents";
 import About from "./components/About";
+import Events from "./components/Events";
 import featureImages from "./components/featureImages";
 import Product from "./components/Product";
 import CartBasket from "./components/CartBasket";
@@ -102,7 +102,7 @@ function App() {
 
 	return (
 		<Router>
-			<Navbar cartSize={cartSize} />
+			<Navbar cartSize={cartSize} setModalProduct={setModalProduct} />
 			<Routes>
 				<Route
 					path="/"
@@ -133,7 +133,7 @@ function App() {
 						/>
 					}
 				></Route>
-				<Route path="/news-events" element={<NewsEvents />}></Route>
+				<Route path="/events" element={<Events />}></Route>
 				<Route path="/about" element={<About />}></Route>
 				<Route
 					path="/cart-items"

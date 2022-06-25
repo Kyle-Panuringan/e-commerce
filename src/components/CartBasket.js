@@ -10,7 +10,9 @@ const CartBasket = ({ cartItems, setCartItems, addToCart, removeToCart }) => {
 
 	return (
 		<div className="cart-basket">
-			{cartItems.length === 0 && <h2>Your Cart is Empty!</h2>}
+			{cartItems.length === 0 && (
+				<h2 className="cart-empty">Your Cart is Empty!</h2>
+			)}
 			{cartItems.map((item) => {
 				return (
 					<div key={item.id}>
