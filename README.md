@@ -6,4 +6,4 @@ E-Commerce is a e-commerce website.
 
 E-Commerce Project is built with React JS
 
-Live Demo: Coming Soon
+Live Demo: [E-Commerce](https://kyle-panuringan.github.io/e-commerce/)
