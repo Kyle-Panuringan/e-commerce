@@ -1002,4 +1002,21 @@ code {
 		text-align: justify;
 		margin: 10px 20px;
 	}
+	.slider-container {
+		position: relative;
+		width: 100%;
+		height: 400px;
+		object-fit: fill;
+	}
+	.btn-slide {
+		font-size: 3rem;
+	}
+	.prev {
+		top: 40%;
+		left: 10px;
+	}
+	.next {
+		top: 40%;
+		right: 10px;
+	}
 }
