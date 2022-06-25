@@ -40,30 +40,49 @@ function App() {
 	const [products, setProducts] = useState(data);
 	const [productData, setProductData] = useState(null);
 	const [cartItems, setCartItems] = useState([]);
+	const [itemCount, setItemCount] = useState(1);
 	const [search, setSearch] = useState("");
 	const [homeCategory, setHomeCategory] = useState("");
 	const [modalProduct, setModalProduct] = useState(false);
+	const [quantity, setQuantity] = useState(1);
 	const [ascend, setAscend] = useState({
 		sortAscend: false,
 		sortActive: false,
 	});
 	const unsortProducts = data;
-
-	function addToCart(product) {
+	// Add Product in Cart
+	function addToCart(product, qty = 1) {
+		// Check if the pass product exist in "cartItems" by find method to locate its "id" if already exist
 		const exist = cartItems.find((item) => item.id === product.id);
 		if (exist) {
 			setCartItems(
 				cartItems.map((item) =>
 					item.id === product.id
-						? { ...exist, quantity: exist.quantity + 1 }
+						? { ...exist, quantity: exist.quantity + qty }
 						: item
 				)
 			);
 		} else {
-			setCartItems([...cartItems, { ...products, quantity: 1 }]);
+			// If the new product does not exist, then add it to "cartItems", and give it new property called "quantity"
+			setCartItems([...cartItems, { ...product, quantity: qty }]);
 		}
 	}
-
+	// Remove Product in Cart
+	function removeToCart(product) {
+		const exist = cartItems.find((item) => item.id === product.id);
+		if (exist.quantity === 1) {
+			setCartItems(cartItems.filter((item) => item.id !== product.id));
+		} else {
+			setCartItems(
+				cartItems.map((item) =>
+					item.id === product.id
+						? { ...exist, quantity: exist.quantity - 1 }
+						: item
+				)
+			);
+		}
+	}
+	// Sort Products by Price
 	function sortProducts() {
 		let sortItems = [...products];
 		if (ascend.sortAscend) {
@@ -75,8 +94,9 @@ function App() {
 	}
 
 	useEffect(() => {
-		console.log(productData);
-	}, [productData]);
+		console.log(cartItems);
+		console.log("Length:", cartItems.length);
+	}, [cartItems]);
 
 	return (
 		<Router>
@@ -89,6 +109,7 @@ function App() {
 							categories={categories}
 							featureImages={featureImages}
 							setHomeCategory={setHomeCategory}
+							itemCount={itemCount}
 						/>
 					}
 				></Route>
@@ -115,7 +136,14 @@ function App() {
 				<Route path="/about" element={<About />}></Route>
 				<Route
 					path="/cart-items"
-					element={<CartBasket cartItems={cartItems} />}
+					element={
+						<CartBasket
+							cartItems={cartItems}
+							setCartItems={setCartItems}
+							addToCart={addToCart}
+							removeToCart={removeToCart}
+						/>
+					}
 				></Route>
 			</Routes>
 			{modalProduct && (
@@ -123,6 +151,8 @@ function App() {
 					addToCart={addToCart}
 					productData={productData}
 					setModalProduct={setModalProduct}
+					quantity={quantity}
+					setQuantity={setQuantity}
 				/>
 			)}
 		</Router>

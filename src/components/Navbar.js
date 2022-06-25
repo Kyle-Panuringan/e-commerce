@@ -1,12 +1,10 @@
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
-
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	const [showLink, setShowLink] = React.useState(false);
-
 	return (
 		<nav>
 			<div className="nav-base">
@@ -19,8 +17,10 @@ const Navbar = () => {
 					<div className="nav-buttons">
 						<div className="nav-cart-items">
 							<button className="nav-cart">
-								<p className="nav-cart-numbers">0</p>
-								<FaShoppingCart />
+								<p className="nav-cart-numbers">1</p>
+								<Link to="cart-items">
+									<FaShoppingCart />
+								</Link>
 							</button>
 						</div>
 						<button

@@ -1,7 +1,15 @@
+import React from "react";
 import { AiFillStar } from "react-icons/ai";
 
-const Product = ({ addToCart, productData, setModalProduct }) => {
-	const { id, image, title, category, price, rating } = productData;
+const Product = ({
+	addToCart,
+	productData,
+	setModalProduct,
+	quantity,
+	setQuantity,
+}) => {
+	const { image, title, price, rating } = productData;
+
 	return (
 		<div
 			className="product-modal"
@@ -36,12 +44,32 @@ const Product = ({ addToCart, productData, setModalProduct }) => {
 						<h3 className="price">&#8369;{price}</h3>
 						<div className="buttons-quantity">
 							<h3>Quantity: </h3>
-							<button>-</button>
-							<span>0</span>
-							<button>+</button>
+							<button
+								onClick={() => {
+									setQuantity(
+										quantity > 1 ? quantity - 1 : quantity
+									);
+								}}
+							>
+								-
+							</button>
+							<span>{quantity}</span>
+							<button
+								onClick={() => {
+									setQuantity(quantity + 1);
+								}}
+							>
+								+
+							</button>
 						</div>
 						<div className="buttons-footer">
-							<button>Add to Cart</button>
+							<button
+								onClick={() => {
+									addToCart(productData, quantity);
+								}}
+							>
+								Add to Cart
+							</button>
 							<button>Buy Now</button>
 						</div>
 					</div>
