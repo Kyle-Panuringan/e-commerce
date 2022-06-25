@@ -1,8 +1,8 @@
 import React from "react";
 
 const CartBasket = ({ cartItems, setCartItems, addToCart, removeToCart }) => {
+	// Calculate the total price of every quantity that is inside the cartItems Array
 	const totalPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
-	const cartSize = cartItems.reduce((a, c) => a + c.quantity, 0);
 
 	function removeItem(product) {
 		setCartItems(cartItems.filter((item) => item.id !== product.id));
@@ -57,12 +57,13 @@ const CartBasket = ({ cartItems, setCartItems, addToCart, removeToCart }) => {
 				<div>
 					<div className="cart-total">
 						<h3>Total Price: </h3>
-						<h3>{cartSize}</h3>
+						<h3>&#8369;{totalPrice.toFixed(2)}</h3>
 					</div>
 					<div className="cart-clear">
 						<button onClick={() => setCartItems([])}>
 							Clear Cart
 						</button>
+						<button>Checkout</button>
 					</div>
 				</div>
 			)}

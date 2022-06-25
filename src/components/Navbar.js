@@ -3,7 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ cartSize }) => {
 	const [showLink, setShowLink] = React.useState(false);
 	return (
 		<nav>
@@ -17,7 +17,13 @@ const Navbar = () => {
 					<div className="nav-buttons">
 						<div className="nav-cart-items">
 							<button className="nav-cart">
-								<p className="nav-cart-numbers">1</p>
+								<p
+									className={`nav-cart-numbers ${
+										cartSize > 0 ? "active" : ""
+									}`}
+								>
+									{cartSize}
+								</p>
 								<Link to="cart-items">
 									<FaShoppingCart />
 								</Link>

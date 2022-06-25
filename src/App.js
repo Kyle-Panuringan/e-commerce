@@ -40,7 +40,7 @@ function App() {
 	const [products, setProducts] = useState(data);
 	const [productData, setProductData] = useState(null);
 	const [cartItems, setCartItems] = useState([]);
-	const [itemCount, setItemCount] = useState(1);
+	const [cartSize, setCartSize] = useState(0);
 	const [search, setSearch] = useState("");
 	const [homeCategory, setHomeCategory] = useState("");
 	const [modalProduct, setModalProduct] = useState(false);
@@ -50,6 +50,7 @@ function App() {
 		sortActive: false,
 	});
 	const unsortProducts = data;
+	// Use reduce method to get all the overall total quantity of every products available inside the "cartItems"
 	// Add Product in Cart
 	function addToCart(product, qty = 1) {
 		// Check if the pass product exist in "cartItems" by find method to locate its "id" if already exist
@@ -95,12 +96,13 @@ function App() {
 
 	useEffect(() => {
 		console.log(cartItems);
-		console.log("Length:", cartItems.length);
+		console.log(cartSize);
+		setCartSize(cartItems.reduce((a, c) => a + c.quantity, 0));
 	}, [cartItems]);
 
 	return (
 		<Router>
-			<Navbar />
+			<Navbar cartSize={cartSize} />
 			<Routes>
 				<Route
 					path="/"
@@ -109,7 +111,6 @@ function App() {
 							categories={categories}
 							featureImages={featureImages}
 							setHomeCategory={setHomeCategory}
-							itemCount={itemCount}
 						/>
 					}
 				></Route>
