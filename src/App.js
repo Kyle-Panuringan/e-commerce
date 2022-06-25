@@ -7,7 +7,7 @@ import Events from "./components/Events";
 import featureImages from "./components/featureImages";
 import Product from "./components/Product";
 import CartBasket from "./components/CartBasket";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { BsCheckAll } from "react-icons/bs";
 import { GiSmartphone, GiHeartNecklace, GiLargeDress } from "react-icons/gi";
 import { FaTshirt } from "react-icons/fa";
