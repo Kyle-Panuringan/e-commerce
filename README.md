@@ -1,6 +1,6 @@
 # E-Commerce
 
-E-Commerce is a e-commerce website.
+E-commerce is an e-commerce website where you can navigate, search, and filter the available products on the page.
 
 ## Project Overview
 
